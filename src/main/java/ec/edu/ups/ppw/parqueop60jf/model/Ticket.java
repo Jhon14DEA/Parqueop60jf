@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,57 +20,68 @@ public class Ticket implements Serializable{
 
 	@Id
 //	@GeneratedValue
-	private String codigo;
+	private int codigo;	
+	private Date fechaIngreso;
+	private Date fechaSalida;
+	private double Total;
+//	private String fechaIngreso;
+//	private String fechaSalida;
 	
-//	private Date fechaIngreso;
-//	private Date fechaSalida;
-	private String fechaIngreso;
-	private String fechaSalida;
-	
-//	@OneToOne
-//	@JoinColumn(name="placa_vehiculo")
-//	private Vehiculo vehiculo;
-	
-	@OneToMany
+	@OneToOne
+	@JoinColumn(name="placa_vehiculo")
+	private Vehiculo vehiculo;
+//	el cascade se usa en el one tu many 
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_ticket")
-	private List<Servicio> servicios;
-	
+	private List<Servicio> servicios;	
 	
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public String getFechaIngreso() {
+	public Date getFechaIngreso() {
 		return fechaIngreso;
 	}
-	public void setFechaIngreso(String fechaIngreso) {
+	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	public String getFechaSalida() {
+	public Date getFechaSalida() {
 		return fechaSalida;
 	}
-	public void setFechaSalida(String fechaSalida) {
+	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
-//	public Vehiculo getVehiculo() {
-//		return vehiculo;
-//	}
-//	public void setVehiculo(Vehiculo vehiculo) {
-//		this.vehiculo = vehiculo;
-//	}
 	public List<Servicio> getServicios() {
 		return servicios;
 	}
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
 	}
+	
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+	
+	
+	public double getTotal() {
+		return Total;
+	}
+	public void setTotal(double total) {
+		Total = total;
+	}
 	@Override
 	public String toString() {
-		return "Ticket [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida + "]";
+		return "Ticket [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida
+				+ ", Total=" + Total + ", vehiculo=" + vehiculo + ", servicios=" + servicios + "]";
 	}
+	
+	
 	
 	
 	

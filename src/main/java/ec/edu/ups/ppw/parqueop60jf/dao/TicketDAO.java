@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import ec.edu.ups.ppw.parqueop60jf.model.Servicio;
 import ec.edu.ups.ppw.parqueop60jf.model.Ticket;
 
 @Stateless
@@ -30,13 +31,13 @@ public class TicketDAO implements Serializable{
 		em.merge(ticket);
 	}
 
-	public Ticket read(String codigo) {
+	public Ticket read(int codigo) {
 //		solo podemos pasar la clave primaria. 
 		Ticket ticket = em.find(Ticket.class, codigo);
 		return ticket;
 	}
 
-	public Ticket delete(String codigo) {
+	public Ticket delete(int codigo) {
 		em.remove(this.read(codigo));
 		return null;
 	}
@@ -48,5 +49,11 @@ public class TicketDAO implements Serializable{
 		Query query = em.createQuery(jpql, Ticket.class);
 		return query.getResultList();
 	}
+//	public List<Servicio> list1(){
+//		String jpql = "SELECT s FROM Servicio s";
+////		Query query = em.createNamedQuery(jpql, Ticket.class);
+//		Query query = em.createQuery(jpql, Ticket.class);
+//		return query.getResultList();
+//	}
 
 }

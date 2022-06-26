@@ -3,6 +3,7 @@ package ec.edu.ups.ppw.parqueop60jf.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -10,13 +11,15 @@ public class Servicio implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	private String codigo;
+	@GeneratedValue
+	private int codigo;
 	private String descripcion;
-	private String valor;
-	public String getCodigo() {
+	private double valor;
+	
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getDescripcion() {
@@ -25,20 +28,16 @@ public class Servicio implements Serializable{
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public String getValor() {
+	
+	public double getValor() {
 		return valor;
 	}
-	public void setValor(String valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	@Override
 	public String toString() {
 		return "Servicio [codigo=" + codigo + ", descripcion=" + descripcion + ", valor=" + valor + "]";
 	}	
-	
-	
-	
-	
-	
 	
 }

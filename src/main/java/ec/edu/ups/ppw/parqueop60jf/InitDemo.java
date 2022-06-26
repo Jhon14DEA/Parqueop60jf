@@ -1,4 +1,5 @@
 package ec.edu.ups.ppw.parqueop60jf;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,45 +53,57 @@ public class InitDemo {
 		for(Vehiculo v : listado) {
 			System.out.println(v);
 		}
-//	///////////////////	
-		Ticket ticket = new Ticket();
-		ticket.setCodigo("1");
-		ticket.setFechaIngreso("20.05.2022");		
-		ticket.setFechaSalida("23-06-2022");
-//		ticket1.setVehiculo(vehiculo);
-		daoTicket.insert(ticket);
-
-		Ticket ticket2 = new Ticket();
-		ticket2.setCodigo("2");
-		ticket2.setFechaIngreso("18.05.2022");		
-		ticket2.setFechaSalida("21-06-2022");
-//		ticket2.setVehiculo(vehiculo2);
-		daoTicket.insert(ticket2);
-		
-		List<Ticket> listado1 = daoTicket.list();
-		for(Ticket t : listado1) {
-			System.out.println(t);
-		}
 		
 //		////////////////////
 		Servicio servicio = new Servicio();
-		servicio.setCodigo("1");
+//		servicio.setCodigo("1"); ya no se le pone porque tiene un @generatevalue
 		servicio.setDescripcion("Descripcion1");		
-		servicio.setValor("Valor1");
+		servicio.setValor(2.21);
 //		ticket1.setVehiculo(vehiculo);
-		daoServicio.insert(servicio);
+//		daoServicio.insert(servicio);
 
 		Servicio servicio2 = new Servicio();
-		servicio2.setCodigo("2");
+//		servicio2.setCodigo("2");
 		servicio2.setDescripcion("Descripcion2");		
-		servicio2.setValor("Valor2");
+		servicio2.setValor(3.33);
 //		ticket2.setVehiculo(vehiculo2);
-		daoServicio.insert(servicio2);
+//		daoServicio.insert(servicio2);	
 		
-		List<Servicio> listado2 = daoServicio.list();
-		for(Servicio s : listado2) {
-			System.out.println(s);
+		
+		List<Servicio> servicios = new ArrayList<Servicio>();
+		servicios.add(servicio);
+		servicios.add(servicio2);
+//		for(Servicio s : listado2) {
+//			System.out.println(s);
+//		}
+		
+//	///////////////////	
+		Ticket ticket = new Ticket();
+//		ticket.setCodigo("1");
+//		ticket.setFechaIngreso("20.05.2022");		
+//		ticket.setFechaSalida("23-06-2022");
+//		ticket.setVehiculo(vehiculo);
+//		ticket.setCodigo(1); ya no se pone porque tiene el generate value el codigo int"
+		ticket.setFechaIngreso(new Date());		
+		ticket.setFechaSalida(new Date());
+		ticket.setVehiculo(vehiculo);
+		ticket.setServicios(servicios);
+		daoTicket.insert(ticket);
+
+		Ticket ticket2 = new Ticket();
+//		ticket2.setCodigo(2);
+		ticket2.setFechaIngreso(new Date());		
+		ticket2.setFechaSalida(new Date());
+		ticket2.setVehiculo(vehiculo2);
+		ticket2.setServicios(servicios);
+//		daoTicket.insert(ticket2);
+		
+		List<Ticket> tickets = daoTicket.list();
+		for(Ticket t : tickets) {
+			System.out.println(t);
 		}
+		
+
 	}
  
 	@PreDestroy

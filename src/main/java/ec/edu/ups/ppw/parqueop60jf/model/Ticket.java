@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,22 +20,30 @@ public class Ticket implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@GeneratedValue
+	@GeneratedValue
 	private int codigo;	
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private double Total;
-//	private String fechaIngreso;
-//	private String fechaSalida;
-	
-	@OneToOne
+
+
+	//	onetoone trae datos de forma automatica el eager viene por defecto en el onetoone 
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name="placa_vehiculo")
 	private Vehiculo vehiculo;
-//	el cascade se usa en el one tu many 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_ticket")
-	private List<Servicio> servicios;	
+
 	
+	/**
+	 *cuando tenemos dos onotomany solo uno tiene que ser de tipo eager y los otros tenemos que hacer de forma forsoza la recuperacion de datos.
+	 *el cascade se usa en el one tu many 
+	 *Onetomany trae datos de forma retardada pero se le debe de agregar el fetch para decirle
+	 */	
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="id_ticket")
+	private List<Servicio> servicios;
+	
+
 
 	public int getCodigo() {
 		return codigo;
@@ -61,6 +70,7 @@ public class Ticket implements Serializable{
 		this.servicios = servicios;
 	}
 	
+	
 	public Vehiculo getVehiculo() {
 		return vehiculo;
 	}
@@ -79,11 +89,6 @@ public class Ticket implements Serializable{
 	public String toString() {
 		return "Ticket [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida
 				+ ", Total=" + Total + ", vehiculo=" + vehiculo + ", servicios=" + servicios + "]";
-	}
-	
-	
-	
-	
-	
+	}	
 	
 }

@@ -34,6 +34,10 @@ public class TicketDAO implements Serializable{
 	public Ticket read(int codigo) {
 //		solo podemos pasar la clave primaria. 
 		Ticket ticket = em.find(Ticket.class, codigo);
+//		ticket.getVehiculo().getPlaca();
+//		ticket.getServicios().size();
+		ticket.getVehiculo();
+		ticket.getServicios();
 		return ticket;
 	}
 
@@ -44,11 +48,11 @@ public class TicketDAO implements Serializable{
 	
 
 	public List<Ticket> list(){
-		String jpql = "SELECT t FROM Ticket t";
-//		Query query = em.createNamedQuery(jpql, Ticket.class);
+		String jpql = "SELECT t FROM Ticket t";		
 		Query query = em.createQuery(jpql, Ticket.class);
 		return query.getResultList();
 	}
+	
 //	public List<Servicio> list1(){
 //		String jpql = "SELECT s FROM Servicio s";
 ////		Query query = em.createNamedQuery(jpql, Ticket.class);

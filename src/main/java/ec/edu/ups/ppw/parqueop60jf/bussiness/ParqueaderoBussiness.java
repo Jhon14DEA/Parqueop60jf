@@ -1,7 +1,9 @@
 package ec.edu.ups.ppw.parqueop60jf.bussiness;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,8 +11,11 @@ import javax.inject.Inject;
 
 import ec.edu.ups.ppw.parqueop60jf.dao.TicketDAO;
 import ec.edu.ups.ppw.parqueop60jf.dao.VehiculoDAO;
+import ec.edu.ups.ppw.parqueop60jf.model.Servicio;
 import ec.edu.ups.ppw.parqueop60jf.model.Ticket;
 import ec.edu.ups.ppw.parqueop60jf.model.Vehiculo;
+import ec.edu.ups.ppw.parqueop60jf.services.TicketTemp;
+
 
 @Stateless
 public class ParqueaderoBussiness implements Serializable{
@@ -57,12 +62,46 @@ public class ParqueaderoBussiness implements Serializable{
 	
 	public void generarPago() {
 		
-	}
-	public List<Ticket> getTickets(){
-		return  daoTicket.list();
+	}	
+	
+//	public Ticket getTicket(int codigo) {
+//		return daoTicket.read(codigo);
+//	revisar tambien el tickettemp 
+//	}
+	
+	public Ticket getTicket(int codigo) {
+		Ticket ticket = daoTicket.read(codigo);
+		TicketTemp t = new TicketTemp();
+		t.setCodigo(ticket.getCodigo());
+		t.setFechaIngreso(ticket.getFechaIngreso());
+		t.setFechaSalida(ticket.getFechaSalida());
+		t.setTotal(ticket.getTotal());
+			
+		
+		return daoTicket.read(codigo);
 	}
 	
-	public double calcularCosto(Date fechaInicio,  Date fechaFin) {
+	public List<Ticket> getTickets(){
+		return  daoTicket.list();
+	}	
+	
+	public List<TicketTemp> getTicketsTemp() {
+		
+		List<Ticket> tickets = daoTicket.list();
+		List<TicketTemp> listado = new ArrayList<TicketTemp>();
+		for(Ticket ticket : tickets) {
+			TicketTemp t = new TicketTemp();
+			t.setCodigo(ticket.getCodigo());
+			t.setFechaIngreso(ticket.getFechaIngreso());
+			t.setFechaSalida(ticket.getFechaSalida());
+			t.setTotal(ticket.getTotal());
+			listado.add(t);			
+		}
+		return listado;
+	}	
+
+	
+	private double calcularCosto(Date fechaInicio,  Date fechaFin) {
 		return 8;		
 	}
 	

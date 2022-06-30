@@ -17,17 +17,20 @@ import javax.persistence.OneToOne;
 import ec.edu.ups.ppw.parqueop60jf.model.Servicio;
 import ec.edu.ups.ppw.parqueop60jf.model.Vehiculo;
 
-@Entity
+
 public class TicketTemp implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
+	
 	private int codigo;	
 	private Date fechaIngreso;
 	private Date fechaSalida;
 	private double Total;
+	
+	private VehiculoTemp vehiculotemp;
+
+	private List<Servicio> servicios;
 
 	public int getCodigo() {
 		return codigo;
@@ -53,12 +56,34 @@ public class TicketTemp implements Serializable{
 	}
 	public void setTotal(double total) {
 		Total = total;
+	}	
+	
+	public VehiculoTemp getVehiculotemp() {
+		return vehiculotemp;
 	}
+	public void setVehiculotemp(VehiculoTemp vehiculotemp) {
+		this.vehiculotemp = vehiculotemp;
+	}
+	public List<Servicio> getServicios() {
+		return servicios;
+	}
+	public void setServicios(List<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+//	@Override
+//	public String toString() {
+//		return "TicketTemp2 [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida
+//				+ ", Total=" + Total + "]";
+//	}
 	@Override
 	public String toString() {
-		return "TicketTemp2 [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida
-				+ ", Total=" + Total + "]";
+		return "TicketTemp [codigo=" + codigo + ", fechaIngreso=" + fechaIngreso + ", fechaSalida=" + fechaSalida
+				+ ", Total=" + Total + ", vehiculo=" + vehiculotemp + ", servicios=" + servicios + "]";
 	}
+	
+	
+	
+	
 	
 	
 }

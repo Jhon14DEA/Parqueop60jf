@@ -15,6 +15,7 @@ import ec.edu.ups.ppw.parqueop60jf.model.Servicio;
 import ec.edu.ups.ppw.parqueop60jf.model.Ticket;
 import ec.edu.ups.ppw.parqueop60jf.model.Vehiculo;
 import ec.edu.ups.ppw.parqueop60jf.services.TicketTemp;
+import ec.edu.ups.ppw.parqueop60jf.services.VehiculoTemp;
 
 
 @Stateless
@@ -64,21 +65,25 @@ public class ParqueaderoBussiness implements Serializable{
 		
 	}	
 	
-//	public Ticket getTicket(int codigo) {
-//		return daoTicket.read(codigo);
-//	revisar tambien el tickettemp 
-//	}
-	
 	public Ticket getTicket(int codigo) {
+		return daoTicket.read(codigo);
+//	revisar tambien el tickettemp 
+	}
+	
+	public TicketTemp getTicket2(int codigo) {
 		Ticket ticket = daoTicket.read(codigo);
 		TicketTemp t = new TicketTemp();
 		t.setCodigo(ticket.getCodigo());
 		t.setFechaIngreso(ticket.getFechaIngreso());
 		t.setFechaSalida(ticket.getFechaSalida());
 		t.setTotal(ticket.getTotal());
-			
 		
-		return daoTicket.read(codigo);
+		VehiculoTemp vt = new VehiculoTemp();
+		vt.setPlaca(ticket.getVehiculo().getPlaca());		
+		vt.setMarca(ticket.getVehiculo().getMarca());
+		vt.setColor(ticket.getVehiculo().getColor());
+		t.setVehiculotemp(vt);
+		return t;
 	}
 	
 	public List<Ticket> getTickets(){

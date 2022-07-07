@@ -1,8 +1,7 @@
 package ec.edu.ups.ppw.parqueop60jf.services;
 
-import java.io.Serializable;
-import java.util.List;
 
+import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,7 +10,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-
 import ec.edu.ups.ppw.parqueop60jf.bussiness.ParqueaderoBussiness;
 import ec.edu.ups.ppw.parqueop60jf.model.Ticket;
 import ec.edu.ups.ppw.parqueop60jf.model.Vehiculo;
@@ -104,6 +102,69 @@ public class ParqueoService {
 	public String registrarIngreso(Vehiculo vehiculo) {
 		try {
 			parqueadero.ingresoVehiculo(vehiculo);
+			return "ok";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "ERROR";	
+		}
+
+	}
+	/**
+	 */
+	@POST
+	@Path("ingreso2")
+//	@Consumes("application/json")
+//	@Produces("application/json")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	public Respuesta registrarIngreso2(Vehiculo vehiculo) {
+		Respuesta res = new Respuesta();
+		try {
+			parqueadero.ingresoVehiculo(vehiculo);
+			res.setCodigo(1);
+			res.setMensae("ok");
+			return res;
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setCodigo(99);
+			res.setMensae("ERROR");
+			return res;
+		}
+
+	}
+	
+	@POST
+	@Path("salida")
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+     
+	public Respuesta registrarSalida (int numeroTicket) {
+		Respuesta res = new Respuesta ();
+		try {
+			parqueadero.retirarVehiculo(numeroTicket);
+	         res.setCodigo(1);
+	         res.setMensae("OK");;
+	         
+	         return res;
+		
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			res.setCodigo(99);
+			res.setMensae("ERROR: "+e.getMessage());
+			return res; 
+			
+		}
+		
+	
+	}
+	
+	@GET
+	@Path("salida/{ids}")
+	@Produces("application/json")
+	public String registrarSalida2( @PathParam("ids") int codigo, int numeroTicket) {
+		try {
+			parqueadero.retirarVehiculo(numeroTicket);
 			return "ok";
 		} catch (Exception e) {
 			e.printStackTrace();

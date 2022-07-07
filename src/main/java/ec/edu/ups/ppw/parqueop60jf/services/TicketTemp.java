@@ -24,8 +24,8 @@ public class TicketTemp implements Serializable{
 
 	
 	private int codigo;	
-	private Date fechaIngreso;
-	private Date fechaSalida;
+	private String fechaIngreso;
+	private String fechaSalida;
 	private double Total;
 	
 	private VehiculoTemp vehiculotemp;
@@ -38,19 +38,20 @@ public class TicketTemp implements Serializable{
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public Date getFechaIngreso() {
+
+	
+	public String getFechaIngreso() {
 		return fechaIngreso;
 	}
-	public void setFechaIngreso(Date fechaIngreso) {
+	public void setFechaIngreso(String fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
-	public Date getFechaSalida() {
+	public String getFechaSalida() {
 		return fechaSalida;
 	}
-	public void setFechaSalida(Date fechaSalida) {
+	public void setFechaSalida(String fechaSalida) {
 		this.fechaSalida = fechaSalida;
 	}
-	
 	public double getTotal() {
 		return Total;
 	}

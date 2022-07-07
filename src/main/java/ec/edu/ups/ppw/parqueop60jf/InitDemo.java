@@ -20,8 +20,8 @@ import ec.edu.ups.ppw.parqueop60jf.model.Vehiculo;
 // crea usuarios crea otro de los mismos pero se queda guardado solo para el mientras tenga vida el app 
 // stateles crea uno por solicitud se procesa la solicitud y se elimina. 
 //@Startup se crea cuando se ejecuta la aplicacion. 
-@Singleton
-@Startup
+//@Singleton
+//@Startup
 public class InitDemo {	
 	
 	@Inject
@@ -77,14 +77,14 @@ public class InitDemo {
 
 
 		Ticket ticket = new Ticket();
-		ticket.setFechaIngreso(new Date());		
+//		ticket.setFechaIngreso(new Date());		
 //		ticket.setFechaSalida(new Date());
 		ticket.setVehiculo(vehiculo);
 		ticket.setServicios(servicios1);
 		daoTicket.insert(ticket);
 
 		Ticket ticket2 = new Ticket();
-		ticket2.setFechaIngreso(new Date());		
+//		ticket2.setFechaIngreso(new Date());		
 //		ticket2.setFechaSalida(new Date());
 		ticket2.setVehiculo(vehiculo2);
 		ticket2.setServicios(servicios2);

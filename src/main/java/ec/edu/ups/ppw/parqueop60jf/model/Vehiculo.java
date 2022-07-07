@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +12,9 @@ import javax.persistence.Table;
 public class Vehiculo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+//	@GeneratedValue
+//	private int codigoV;	
 	@Id
 	@Column(name="placa_vehiculo")
 	private String placa;
@@ -18,6 +22,13 @@ public class Vehiculo implements Serializable{
 	private String marca;
 	private String Color;
 	
+	
+//	public int getCodigoV() {
+//		return codigoV;
+//	}
+//	public void setCodigoV(int codigoV) {
+//		this.codigoV = codigoV;
+//	}
 	public String getPlaca() {
 		return placa;
 	}
@@ -40,7 +51,11 @@ public class Vehiculo implements Serializable{
 	public String toString() {
 		return "Vehiculo [placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
 	}
-	
+//	@Override
+//	public String toString() {
+//		return "Vehiculo [codigoV=" + codigoV + ", placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
+//	}
+//	
 	
 	
 	

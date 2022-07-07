@@ -12,11 +12,19 @@ public class VehiculoTemp implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+//	private int codigov;
 	private String placa;
 	
 	private String marca;
 	private String Color;
 	
+	
+//	public int getCodigov() {
+//		return codigov;
+//	}
+//	public void setCodigov(int codigov) {
+//		this.codigov = codigov;
+//	}
 	public String getPlaca() {
 		return placa;
 	}
@@ -39,6 +47,12 @@ public class VehiculoTemp implements Serializable{
 	public String toString() {
 		return "Vehiculo [placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
 	}
+//	@Override
+//	public String toString() {
+//		return "VehiculoTemp [codigov=" + codigov + ", placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
+//	}
+	
+	
 	
 	
 	

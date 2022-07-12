@@ -1,6 +1,7 @@
 package ec.edu.ups.ppw.parqueop60jf.bussiness;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +23,7 @@ import ec.edu.ups.ppw.parqueop60jf.services.VehiculoTemp;
 @Stateless
 public class ParqueaderoBussiness implements Serializable{
 
-	SimpleDateFormat formato=new SimpleDateFormat("dd/mm/yyyy ; hh:mm:ss");
+	SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
@@ -88,25 +89,26 @@ public class ParqueaderoBussiness implements Serializable{
 		System.out.println("El vehiculo salio");
 	}
 	
-	public double generarPago(Ticket ticket) {
-		Date fechaing;
-		Date fechaSal;
-		 try {
-			fechaing = new SimpleDateFormat("dd/mm/yy ; hh:mm").parse(ticket.getFechaIngreso());
-			fechaSal = new SimpleDateFormat("dd/mm/yy ; hh:mm").parse(ticket.getFechaSalida());
-			double minutos = (fechaSal.getTime()-fechaing.getTime()/6000);
-			double fraccion = (int) (minutos/25);
-			if (fraccion<1) {
-				return  0.50;
-						
-			}
-			return fraccion*0.50;
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	        return 0.00;
+/*	public double generarPago(Ticket ticket) {
+		  Date fechaSalida;
+		  Date fechaIngreso;
+		try {
+			fechaSalida = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").parse(ticket.getFechaSalida());
+			fechaIngreso=new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").parse(ticket.getFechaIngreso()); 
+			
+	        double minutos =  ( fechaSalida.getTime()- fechaIngreso.getTime())/60000;
+	        double fraccion = (int) (minutos / 25);
+	        
 
-}
+	        
+	        return fraccion * 0.25;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();			
+			return 0.0;
+		} 
+	 
+}*/
 	
 	
 	public Ticket getTicket(int codigo) {
@@ -153,27 +155,28 @@ public class ParqueaderoBussiness implements Serializable{
 	}	
 
 	
-	private double calcularCosto(Ticket ticket) {
+	private float calcularCosto(Ticket ticket) {
 //		double minutos =  ( ticket.getFechaSalida().getTime()- ticket.getFechaIngreso().getTime()) / 60000;
 //        double fraccion = (int) (minutos / 30);
 //        
 //        return fraccion * 1;
 		Date fechaing;
 		Date fechaSal;
+		
 		 try {
-			fechaing = new SimpleDateFormat("dd/mm/yy ; hh:mm").parse(ticket.getFechaIngreso());
-			fechaSal = new SimpleDateFormat("dd/mm/yy ; hh:mm").parse(ticket.getFechaSalida());
-			double minutos = (fechaSal.getTime()-fechaing.getTime()/6000);
-			double fraccion = (int) (minutos/25);
-			if (fraccion<1) {
-				return  0.50;
-						
-			}
-			return fraccion*0.50;
+			fechaing = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").parse(ticket.getFechaIngreso());
+			fechaSal = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").parse(ticket.getFechaSalida());
+			double minutos = ((fechaSal.getTime()-fechaing.getTime()) / 60000);
+			double fraccion = (int) (minutos/10);
+			
+			
+			return (float) (minutos*0.20);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// getMessage sirve para darme elmensaje de la exepcion
+			System.out.println("ERROR:"+e.getMessage());
+			return (float) 0.10;
 		}
-	        return 0.00;
+	        
 	}
 	
 

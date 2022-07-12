@@ -14,7 +14,7 @@ public class Vehiculo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 //	@GeneratedValue
-//	private int codigoV;	
+//	private int codigoV;
 	@Id
 	@Column(name="placa_vehiculo")
 	private String placa;

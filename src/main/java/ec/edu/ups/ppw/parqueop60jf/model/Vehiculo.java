@@ -15,20 +15,14 @@ public class Vehiculo implements Serializable{
 	
 //	@GeneratedValue
 //	private int codigoV;
-	@Id
+	
 	@Column(name="placa_vehiculo")
 	private String placa;
-	@Column(name ="marca", nullable = false)
+	@Id	
 	private String marca;
-	private String Color;
+	private String Color;	
 	
-	
-//	public int getCodigoV() {
-//		return codigoV;
-//	}
-//	public void setCodigoV(int codigoV) {
-//		this.codigoV = codigoV;
-//	}
+
 	public String getPlaca() {
 		return placa;
 	}
@@ -51,12 +45,7 @@ public class Vehiculo implements Serializable{
 	public String toString() {
 		return "Vehiculo [placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
 	}
-//	@Override
-//	public String toString() {
-//		return "Vehiculo [codigoV=" + codigoV + ", placa=" + placa + ", marca=" + marca + ", Color=" + Color + "]";
-//	}
-//	
-	
+
 	
 	
 	

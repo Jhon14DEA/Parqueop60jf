@@ -136,8 +136,7 @@ public class ParqueoService {
 	@POST
 	@Path("salida")
 	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-     
+	@Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)     
 	public Respuesta registrarSalida (int numeroTicket) {
 		Respuesta res = new Respuesta ();
 		try {
